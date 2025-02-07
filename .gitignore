@@ -1,0 +1,54 @@
+# Prerequisites
+*.d
+
+# Vscode files
+.vscode/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+bin/
+obj/
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+
+# Experiments results
+results/
+
+# Ignore old files and backups
+old/
+
+# Editor-specific files
+*.swp
+*.swo
+*.bak
+*.tmp
+*.old
+.DS_Store
+Thumbs.db
+.clang-format

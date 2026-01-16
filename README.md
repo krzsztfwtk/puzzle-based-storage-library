@@ -1,6 +1,6 @@
 # puzzle-based-storage-library
 
-library for route programming in puzzle-based storage systems and other similar systems
+free library for route programming in puzzle-based storage systems and other similar systems
 
 At this point, the library has implemented single-item retrieval in puzzle-based storage parking systems using Dijkstra's and A* algorithm and manhattan distance, chebyshev distance, octile distrance and an occupancy-based variant heuristics.
 

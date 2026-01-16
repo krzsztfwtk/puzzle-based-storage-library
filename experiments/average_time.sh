@@ -5,7 +5,6 @@ if [ "$#" -lt 2 ]; then
     exit 1
 fi
 
-# Number of runs and command
 NUM_RUNS=$1
 shift
 COMMAND="$@"

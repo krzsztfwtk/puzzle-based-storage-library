@@ -21,51 +21,35 @@ IO_NUMS=(1 2 3 4)
 IO_DISTRIBUTIONS=(0 1)
 
 # Movement modes:
-# 0 - axis aligned only
-# 1 - axis + diagonal (planar)
+# 0 - orthogonal
+# 1 - octilinear
 MOVEMENTS=(0 1)
 
-# Base directory for results
 BASE_DIR="./results/exp_02"
 mkdir -p "$BASE_DIR"
 
-# Experiment report
 REPORT_FILE="$BASE_DIR/exp_02.txt"
 
 cat <<EOT > "$REPORT_FILE"
 Experiment: Single Item Retrieval with multiple I/O points
 
 Experiment Purpose:
-Compare performance of scenario 10 under various configurations:
+Compare performance of single-item retrieval under various configurations:
 - I/O placement on vertices vs edges of the grid
-- Different I/O positions (io_num)
+- I/O number between 1 and 4, inclusive
 - Various numbers of occupied cells (fill)
-- Axis-only vs planar (axis + diagonal) movement
-- Multiple grid sizes
+- Orthogonal vs octilinear movement
 
-io_edge_distribution:
-    0 - vertex
-    1 - edge
-
-allow_diagonal_movement:
-    0 - axis aligned only
-    1 - axis + diagonal (planar)
-
-Steps and distance are measured.
+Execution time, number of steps and distance are measured.
 
 Methodology:
-- For each grid in ${GRIDS[@]}, parse grid_x and grid_y.
-- For each combination of (io_edge_distribution, io_num, fill), run the scenario NUM_RUNS times.
-- Test both axis-only (0) and planar movement.
+- For each combination of (io_distribution, io_num, fill), run the scenario $NUM_RUNS times.
+- Test both orthogonal and octilinear movement.
 - For each grid, fill values range from 1 to (total_cells - 1).
-
-CSV Format:
-grid,distribution,movement,io_num,fill,steps,distance,time,run
 
 System Information:
 EOT
 
-# Append system information to the report
 {
     echo "Operating System: $(lsb_release -d | cut -f2)"
     echo "Kernel Version: $(uname -r)"
@@ -76,11 +60,9 @@ EOT
     echo "Available Memory: $(free -h | grep 'Mem:' | awk '{print \$7}')"
 } >> "$REPORT_FILE"
 
-# Create a CSV file for results
-RAW_CSV_FILE="./results/exp_02/exp_02_raw.csv"
+RAW_CSV_FILE="./results/exp_02/exp_02.csv"
 echo "grid,distribution,movement,io_num,fill,steps,distance,time,run" > "$RAW_CSV_FILE"
 
-# Helper function to convert distribution code to a name
 get_distribution_name() {
     local dist=$1
     if [ "$dist" -eq 0 ]; then
@@ -90,7 +72,7 @@ get_distribution_name() {
     fi
 }
 
-# Function to run the scenario and append results to the raw CSV file
+# Run the scenario and append results to the CSV file
 run_scenario() {
     local grid_x=$1
     local grid_y=$2
@@ -105,14 +87,14 @@ run_scenario() {
 
     local movement=""
     if [ "$allow_diag" -eq 0 ]; then
-        movement="axis"
+        movement="orthogonal"
     else
-        movement="planar"
+        movement="octilinear"
     fi
 
     for ((i = 1; i <= NUM_RUNS; i++)); do
         start_time=$(date +%s%N)
-        result=$(./bin/main 10 $grid_x $grid_y $io_num $io_dist $fill $allow_diag)
+        result=$(./bin/main 4 $grid_x $grid_y $io_num $io_dist $fill $allow_diag)
         end_time=$(date +%s%N)
         elapsed_time=$(( (end_time - start_time) / 1000000 )) # Convert to milliseconds
 
@@ -137,23 +119,17 @@ for grid in "${GRIDS[@]}"; do
             echo "  IO num: $io_num"
             for ((fill = 1; fill <= total_cells - 1; fill++)); do
                 echo "  Fill: $fill"
-                # Axis-only movement (allow_diag = 0)
                 run_scenario $grid_x $grid_y $io_dist $io_num $fill 0
-                # Planar movement (allow_diag = 1)
                 run_scenario $grid_x $grid_y $io_dist $io_num $fill 1
             done
         done
     done
 done
 
-# Append results summary to the experiment report
 cat <<EOT >> "$REPORT_FILE"
 
 Results Summary:
 Results are saved in the raw CSV file: ./results/exp_02_raw.csv
-
-CSV Format:
-grid,distribution,movement,io_num,fill,steps,distance,time,run
 
 EOT
 

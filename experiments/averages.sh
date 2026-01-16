@@ -27,12 +27,12 @@ for i in $(seq 1 $NUM_RUNS); do
     TOTAL_DISTANCE=$(echo "$TOTAL_DISTANCE + $DISTANCE" | bc)
 done
 
-# Obliczanie średnich
+# Calculate averages
 AVERAGE_TIME=$(echo "$TOTAL_TIME / $NUM_RUNS" | bc -l)
 AVERAGE_STEPS=$(echo "$TOTAL_STEPS / $NUM_RUNS" | bc -l)
 AVERAGE_DISTANCE=$(echo "$TOTAL_DISTANCE / $NUM_RUNS" | bc -l)
 
-# Wyświetlanie wyników
+# Display results
 echo "Average time over $NUM_RUNS runs: $AVERAGE_TIME seconds"
 echo "Average steps: $AVERAGE_STEPS"
 echo "Average distance: $AVERAGE_DISTANCE"

@@ -14,7 +14,9 @@ After building with `make` you can explore preset scenarios. Run program with:
 
 where `scenario` is a number of scenario to run and `arg1`, `arg2`, `argN` are parsed further to the chosen scenario.
 
-Refer to `scenarios.cpp` for example usage of the library. You can also implement your own custom scenarios.
+Refer to `scenarios` directory for example usage of the library. You can also implement your own custom scenarios.
+
+__Citation request__ If you use this library, please cite [^pbsl]
 
 ## Example usage
 
@@ -83,3 +85,20 @@ Below is a summary of the main features and tasks currently implemented or plann
 - **Visualization**
   - [x] Simple (CLI)
   - [ ] Advanced eg. 3D graphics
+
+
+[^pbsl]: Krzysztof Paszek, Justyna Paszek, Krzysztof Witek, Damian Grzechca, A Unified Environment for Testing Shortest-Path Algorithms Used in PBS Systems, [in] Applied Sciences, 2026, volume 16, number 2, article 960
+  ```
+  @Article{app16020960,
+    AUTHOR = {Paszek, Krzysztof and Paszek, Justyna and Witek, Krzysztof and Grzechca, Damian},
+    TITLE = {A Unified Environment for Testing Shortest-Path Algorithms Used in PBS Systems},
+    JOURNAL = {Applied Sciences},
+    VOLUME = {16},
+    YEAR = {2026},
+    NUMBER = {2},
+    ARTICLE-NUMBER = {960},
+    URL = {https://www.mdpi.com/2076-3417/16/2/960},
+    ISSN = {2076-3417},
+    DOI = {10.3390/app16020960}
+  }
+  ```

@@ -86,6 +86,7 @@ Below is a summary of the main features and tasks currently implemented or plann
   - [x] Simple (CLI)
   - [ ] Advanced eg. 3D graphics
 
+------
 
 [^pbsl]: Krzysztof Paszek, Justyna Paszek, Krzysztof Witek, Damian Grzechca, A Unified Environment for Testing Shortest-Path Algorithms Used in PBS Systems, [in] Applied Sciences, 2026, volume 16, number 2, article 960
   ```
